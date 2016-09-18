@@ -1,5 +1,5 @@
-{% set version = "1.3.2" %}
-{%set sha256 = "4c039a7960263343ecb709fdaf728cbea4f3b3f08cbe080ac5a9c6e54d629fa6" %}
+{% set version = "1.3.3" %}
+{%set sha256 = "103623bb1148b175659e81ebaf9f3642349a2fcd456dcf6e573f85b2b6ff2177" %}
 
 package:
   name: constructor
