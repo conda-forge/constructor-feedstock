@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   script: python setup.py install
 
 requirements:
@@ -34,6 +34,8 @@ test:
 about:
   home: http://github.com/conda/constructor
   license: BSD 3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
   summary: create installer from conda packages
 
 extra:
