@@ -21,15 +21,15 @@ requirements:
   run:
     - python
     - libconda
+    - pycosat >=0.6.1
     - pillow >=3.1  # [win]
-    - nsis          # [win]
+    - nsis >=3.01   # [win]
 
 test:
   imports:
     - constructor
-
   commands:
-    - constructor --help
+    - constructor --test
 
 about:
   home: http://github.com/conda/constructor
