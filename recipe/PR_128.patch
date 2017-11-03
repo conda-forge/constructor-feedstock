@@ -1,0 +1,24 @@
+From 1e499b1190523b02c4f47d9adb397398a0730af5 Mon Sep 17 00:00:00 2001
+From: Marcel Bargull <marcel.bargull@udo.edu>
+Date: Fri, 3 Nov 2017 16:00:54 +0100
+Subject: [PATCH] tests: fix test_imaging: set *_image_text
+
+---
+ constructor/tests/test_imaging.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git constructor/tests/test_imaging.py constructor/tests/test_imaging.py
+index deb4cff..6470a58 100644
+--- constructor/tests/test_imaging.py
++++ constructor/tests/test_imaging.py
+@@ -8,6 +8,10 @@ def test_write_images():
+     tmp_dir = tempfile.mkdtemp()
+ 
+     info = {'name': 'test', 'version': '0.3.1'}
++    for key in ('welcome_image_text', 'header_image_text'):
++        if key not in info:
++            info[key] = info['name']
++
+     write_images(info, tmp_dir)
+ 
+     shutil.rmtree(tmp_dir)
