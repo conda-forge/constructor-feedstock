@@ -1,0 +1,22 @@
+From a6994c516f15387f62b74f69a9922fb4701c4e5a Mon Sep 17 00:00:00 2001
+From: Marcel Bargull <marcel.bargull@udo.edu>
+Date: Fri, 3 Nov 2017 15:51:24 +0100
+Subject: [PATCH] tests: fix osxpkg import
+
+---
+ constructor/tests/__init__.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git constructor/tests/__init__.py constructor/tests/__init__.py
+index 149ef22..e99a1f3 100644
+--- constructor/tests/__init__.py
++++ constructor/tests/__init__.py
+@@ -36,7 +36,7 @@ def main():
+         shar.read_header_template()
+ 
+     if sys.platform == 'darwin':
+-        from .osxpkg import OSX_DIR
++        from ..osxpkg import OSX_DIR
+         assert len(os.listdir(OSX_DIR)) == 6
+ 
+     test_parser.test_1()
