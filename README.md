@@ -14,14 +14,16 @@ Summary: create installer from conda packages
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/constructor-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/constructor-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/constructor-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/constructor-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/constructor-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/constructor-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/constructor-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/constructor-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/constructor-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/constructor-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/constructor-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/constructor-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/constructor/badges/version.svg)](https://anaconda.org/conda-forge/constructor)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/constructor/badges/downloads.svg)](https://anaconda.org/conda-forge/constructor)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-constructor-green.svg)](https://anaconda.org/conda-forge/constructor) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/constructor.svg)](https://anaconda.org/conda-forge/constructor) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/constructor.svg)](https://anaconda.org/conda-forge/constructor) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/constructor.svg)](https://anaconda.org/conda-forge/constructor) |
 
 Installing constructor
 ======================
