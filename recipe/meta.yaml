@@ -1,5 +1,5 @@
-{% set version = "2.1.0" %}
-{% set sha256 = "46e7ecbd5aa3b529c2f6720785655fcbc1b9925bee972e2f0dbc39e40980b10a" %}
+{% set version = "2.2.0" %}
+{% set sha256 = "214a8e70f43c49052d0395638dbaf70a07b50cd915b4c1f1d42c60f2d637594f" %}
 
 package:
   name: constructor
@@ -23,7 +23,7 @@ requirements:
 
   run:
     - python
-    - conda
+    - conda >=4.5
     - ruamel_yaml
     - pillow >=3.1     # [win]
     - nsis >=3.01      # [win]
@@ -44,3 +44,4 @@ about:
 extra:
   recipe-maintainers:
     - jakirkham
+    - mbargull
