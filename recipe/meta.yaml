@@ -10,10 +10,10 @@ source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - 0001-support-noarch-python.patch
+    - 0001-support-noarch-python-packages.patch
 
 build:
-  number: 2000
+  number: 2001
   script: python setup.py install --single-version-externally-managed --record=record.txt
   noarch: python
   entry_points:
