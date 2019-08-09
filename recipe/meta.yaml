@@ -1,5 +1,5 @@
-{% set version = "2.3.0" %}
-{% set sha256 = "81522d7e9b63b66970314e63c1aad69a383541de2d4052fa3e69f892a5bf5dfc" %}
+{% set version = "3.0.0" %}
+{% set sha256 = "d19643c60c8681d96877a27a16dd7b03959f8e2fa10dfc7c8ec5637c14bc693a" %}
 
 package:
   name: constructor
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
+  number: 0
   script: python setup.py install --single-version-externally-managed --record=record.txt
   entry_points:
     - constructor = constructor.main:main
