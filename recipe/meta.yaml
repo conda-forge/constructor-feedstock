@@ -7,8 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  - fn: constructor-{{ version }}.tar.gz
-    url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
+  - url: https://github.com/conda/constructor/releases/download/{{ version }}/constructor-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
       # can be removed in 3.0.1
