@@ -6,24 +6,33 @@ package:
   version: {{ version }}
 
 source:
-  fn: constructor-{{ version }}.tar.gz
-  url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  - fn: constructor-{{ version }}.tar.gz
+    url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+    patches:
+      # can be removed in 3.0.1
+      - 0001-make-directory-arg-optional.patch
+
+  - url: https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-{{ SUBDIR }}.exe
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  script:
+    - mkdir $PREFIX/standalone_conda  # [not win]
+    - cp conda-latest-{{ SUBDIR }}.exe $PREFIX/standalone_conda/conda.exe  # [not win]
+    - mkdir %PREFIX%\standalone_conda  # [win]
+    - COPY conda-latest-{{ SUBDIR }}.exe %PREFIX%\standalone_conda\conda.exe  # [win]
+    - pip install --no-deps -vv .
   entry_points:
     - constructor = constructor.main:main
 
 requirements:
   build:
     - python
-    - setuptools
-
+    - pip
   run:
     - python
-    - conda >=4.5
+    - conda >=4.6
     - ruamel_yaml
     - pillow >=3.1     # [win]
     - nsis >=3.01      # [win]
@@ -45,3 +54,4 @@ extra:
   recipe-maintainers:
     - jakirkham
     - mbargull
+    - msarahan
