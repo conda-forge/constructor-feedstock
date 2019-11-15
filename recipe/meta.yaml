@@ -1,5 +1,5 @@
-{% set version = "3.0.0" %}
-{% set sha256 = "d19643c60c8681d96877a27a16dd7b03959f8e2fa10dfc7c8ec5637c14bc693a" %}
+{% set version = "3.0.1" %}
+{% set sha256 = "228ff80a3fdbc40ab3b45910e299c9f171248d4291e76df15567add29a74dadd" %}
 {% set standalone_ver = "4.7.5" %}
 
 package:
@@ -9,36 +9,22 @@ package:
 source:
   - url: https://github.com/conda/constructor/releases/download/{{ version }}/constructor-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      # can be removed in 3.0.1
-      - 0001-make-directory-arg-optional.patch
-
-  - url: https://repo.anaconda.com/pkgs/misc/conda-execs/conda-{{ standalone_ver }}-{{ SUBDIR }}.exe
-    sha256: 9d4898273879809f551e2fc6277a8b1d25be61e3a1de3e7983dc6339419c4337  # [linux64]
-    sha256: feecde5cfe722d0d60350d49bf670fb8631c95d32cab47fd3615788f9a67d4f5  # [osx]
-    sha256: 4e4a594a5ae598a36821a7dc67de1891b90fee089aaf66fb6c22912459c957d1  # [linux and ppc64le]
-    sha256: c8fc8faf1a743dd074cb1f9af692e085764618ce0af2dc822ed7c29da834fff1  # [win64]
-    sha256: 55a8f338f6d8e7bd12c11946a32c470d8bc809e330cb2e97f3ccee85bc944494  # [win32]
 
 build:
   number: 0
-  script:
-    - mkdir $PREFIX/standalone_conda  # [not win]
-    - cp conda-{{ standalone_ver }}-{{ SUBDIR }}.exe $PREFIX/standalone_conda/conda.exe  # [not win]
-    - mkdir %PREFIX%\standalone_conda  # [win]
-    - COPY conda-{{ standalone_ver }}-{{ SUBDIR }}.exe %PREFIX%\standalone_conda\conda.exe  # [win]
-    - pip install --no-deps -vv .
+  script: "{{ PYTHON }} -m pip install . -vv"
   entry_points:
     - constructor = constructor.main:main
 
 requirements:
-  build:
+  host:
     - python
     - pip
   run:
-    - python
     - conda >=4.6
-    - ruamel_yaml
+    - python
+    - ruamel_yaml >=0.11.14,<0.16
+    - conda-standalone
     - pillow >=3.1     # [win]
     - nsis >=3.01      # [win]
 
@@ -46,17 +32,25 @@ test:
   imports:
     - constructor
   commands:
-    - constructor --test
+    - constructor -V
+    - constructor --test .
 
 about:
   home: http://github.com/conda/constructor
   license: BSD 3-Clause
-  license_family: BSD
   license_file: LICENSE.txt
   summary: create installer from conda packages
+  description: |
+    Constructor is a tool for constructing an installer for a collection of
+    conda packages. It creates an Anaconda-like installer consisting of
+    packages.
+  doc_url: https://conda.io/projects/conda/en/latest/
+  dev_url: https://github.com/conda/constructor
 
 extra:
   recipe-maintainers:
     - jakirkham
     - mbargull
     - msarahan
+    - hadim
+    
