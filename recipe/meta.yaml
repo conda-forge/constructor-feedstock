@@ -1,5 +1,5 @@
-{% set version = "3.0.1" %}
-{% set sha256 = "228ff80a3fdbc40ab3b45910e299c9f171248d4291e76df15567add29a74dadd" %}
+{% set version = "3.0.2" %}
+{% set sha256 = "425857e49b1b538b527d7f05c5c90355d9632d59f363ed807fd9bf89aa914b3a" %}
 {% set standalone_ver = "4.7.5" %}
 
 package:
@@ -12,7 +12,7 @@ source:
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
 
