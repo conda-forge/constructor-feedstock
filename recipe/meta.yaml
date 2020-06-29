@@ -1,6 +1,5 @@
 {% set version = "3.0.2" %}
 {% set sha256 = "b46dc3ffb6a7547f84834cc888570446d94ddfd7be832f08a798f55518a30545" %}
-{% set standalone_ver = "4.7.5" %}
 
 package:
   name: constructor
