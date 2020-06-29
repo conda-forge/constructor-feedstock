@@ -3,7 +3,7 @@ About constructor
 
 Home: http://github.com/conda/constructor
 
-Package license: BSD 3-Clause
+Package license: BSD-3-Clause
 
 Feedstock license: BSD 3-Clause
 
@@ -201,7 +201,6 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@hadim](https://github.com/hadim/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@mbargull](https://github.com/mbargull/)
 * [@msarahan](https://github.com/msarahan/)

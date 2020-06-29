@@ -1,6 +1,5 @@
 {% set version = "3.0.2" %}
-{% set sha256 = "425857e49b1b538b527d7f05c5c90355d9632d59f363ed807fd9bf89aa914b3a" %}
-{% set standalone_ver = "4.7.5" %}
+{% set sha256 = "b46dc3ffb6a7547f84834cc888570446d94ddfd7be832f08a798f55518a30545" %}
 
 package:
   name: constructor
@@ -11,7 +10,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
@@ -37,7 +36,7 @@ test:
 
 about:
   home: http://github.com/conda/constructor
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
   summary: create installer from conda packages
@@ -53,4 +52,3 @@ extra:
     - jakirkham
     - mbargull
     - msarahan
-    - hadim
