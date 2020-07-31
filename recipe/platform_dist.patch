@@ -1,0 +1,13 @@
+diff --git a/constructor/preconda.py b/constructor/preconda.py
+index d58223f..0ac222b 100644
+--- a/constructor/preconda.py
++++ b/constructor/preconda.py
+@@ -78,7 +78,7 @@ def system_info():
+            'platform_full': platform.version()}
+     if sys.platform == 'darwin':
+         out['extra'] = platform.mac_ver()
+-    elif sys.platform.startswith('linux'):
++    elif sys.platform.startswith('linux') and hasattr(platform, 'dist'):
+         out['extra'] = platform.dist()
+     elif sys.platform.startswith('win'):
+         out['extra'] = platform.win32_ver()

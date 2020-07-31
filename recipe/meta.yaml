@@ -8,9 +8,12 @@ package:
 source:
   - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      # https://github.com/conda/constructor/pull/342/commits/98968873d0c90cd90b6f9a98bc745b8c3df4acd6
+      - platform_dist.patch
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
