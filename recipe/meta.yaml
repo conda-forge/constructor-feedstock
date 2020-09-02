@@ -50,5 +50,6 @@ about:
 extra:
   recipe-maintainers:
     - jakirkham
+    - jschueller
     - mbargull
     - msarahan
