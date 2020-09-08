@@ -28,10 +28,19 @@ requirements:
     - nsis >=3.01  # [win]
 
 test:
+  source_files:
+    - tests
+    - scripts
+    - examples
+  requires:
+    - pillow >=3.1
+    - pytest
+  commands:
+    - pytest -v tests
+    - python scripts/run_examples.py
+    - constructor -V
   imports:
     - constructor
-  commands:
-    - constructor -V
 
 about:
   home: http://github.com/conda/constructor
