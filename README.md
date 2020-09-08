@@ -237,6 +237,7 @@ Feedstock Maintainers
 =====================
 
 * [@jakirkham](https://github.com/jakirkham/)
+* [@jschueller](https://github.com/jschueller/)
 * [@mbargull](https://github.com/mbargull/)
 * [@msarahan](https://github.com/msarahan/)
 

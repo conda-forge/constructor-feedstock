@@ -1,5 +1,5 @@
-{% set version = "3.0.2" %}
-{% set sha256 = "b46dc3ffb6a7547f84834cc888570446d94ddfd7be832f08a798f55518a30545" %}
+{% set version = "3.1.0" %}
+{% set sha256 = "8ac5a53e2c6955c1d6fc702aa20f1b35ae57112755acbf75c2808c35976ff219" %}
 
 package:
   name: constructor
@@ -10,7 +10,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
@@ -28,11 +28,20 @@ requirements:
     - nsis >=3.01  # [win]
 
 test:
+  source_files:
+    - tests
+    - scripts
+    - examples
+  requires:
+    - pillow >=3.1
+    - pytest
+  commands:
+    - pytest -v tests
+    # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
+    - python scripts/run_examples.py  # [not aarch64]
+    - constructor -V
   imports:
     - constructor
-  commands:
-    - constructor -V
-    - constructor --test .
 
 about:
   home: http://github.com/conda/constructor
@@ -50,5 +59,6 @@ about:
 extra:
   recipe-maintainers:
     - jakirkham
+    - jschueller
     - mbargull
     - msarahan
