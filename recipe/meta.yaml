@@ -38,7 +38,7 @@ test:
   commands:
     - pytest -v tests
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
-    - python scripts/run_examples.py  # [aarch64]
+    - python scripts/run_examples.py  # [not aarch64]
     - constructor -V
   imports:
     - constructor
