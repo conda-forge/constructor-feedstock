@@ -5,9 +5,13 @@ Home: http://github.com/conda/constructor
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/constructor-feedstock/blob/master/LICENSE.txt)
 
 Summary: create installer from conda packages
+
+Development: https://github.com/conda/constructor
+
+Documentation: https://conda.io/projects/conda/en/latest/
 
 Constructor is a tool for constructing an installer for a collection of
 conda packages. It creates an Anaconda-like installer consisting of

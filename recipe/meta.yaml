@@ -1,5 +1,5 @@
-{% set version = "3.1.0" %}
-{% set sha256 = "13926446679d1e01c6700c3315916536fe57b461fca0e06fbe32eab9e1ba3657" %}
+{% set version = "3.2.0" %}
+{% set sha256 = "6e3aeb5b79a7a6f7a2d6b8492e3db48a672ceff6383026f76eefad9b18c8fee1" %}
 
 package:
   name: constructor
@@ -10,7 +10,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
