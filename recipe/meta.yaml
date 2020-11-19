@@ -1,5 +1,4 @@
 {% set version = "3.2.0" %}
-{% set sha256 = "6e3aeb5b79a7a6f7a2d6b8492e3db48a672ceff6383026f76eefad9b18c8fee1" %}
 
 package:
   name: constructor
@@ -7,10 +6,10 @@ package:
 
 source:
   - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-    sha256: {{ sha256 }}
+    sha256: 8fe86426b5541a9b5c42fb683e7f54a51ac6d01c8fbb69faff1da596f3a7bf21
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
