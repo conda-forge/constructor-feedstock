@@ -6,10 +6,10 @@ package:
 
 source:
   - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-    sha256: 71d00bf9d6e69b868222c7821a70e91baef2fc02efdab8fcf05e51072eea5c46
+    sha256: 666e3be5e6165107d7198d2753e7af6941e7f82d3bef6fc0cc98ec03310c2e01
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
