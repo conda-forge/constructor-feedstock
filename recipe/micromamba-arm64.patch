@@ -1,0 +1,20 @@
+diff --git a/constructor/main.py b/constructor/main.py
+index 46da188..2f533b4 100644
+--- a/constructor/main.py
++++ b/constructor/main.py
+@@ -9,6 +9,7 @@ from __future__ import absolute_import, division, print_function
+ import os
+ from os.path import abspath, basename, expanduser, isdir, join
+ import sys
++from distutils.spawn import find_executable
+ 
+ from .conda_interface import cc_platform
+ from .construct import parse as construct_parse, verify as construct_verify
+@@ -194,6 +195,7 @@ def main():
+     p.add_argument('--conda-exe',
+                    help="path to conda executable",
+                    action="store",
++                   default=find_executable("micromamba"),
+                    metavar="CONDA_EXE")
+ 
+     p.add_argument('dir_path',

@@ -5,11 +5,13 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-    sha256: 666e3be5e6165107d7198d2753e7af6941e7f82d3bef6fc0cc98ec03310c2e01
+  url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
+  sha256: 666e3be5e6165107d7198d2753e7af6941e7f82d3bef6fc0cc98ec03310c2e01
+  patches:
+    - micromamba-arm64.patch  # [arm64]
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
@@ -22,7 +24,8 @@ requirements:
     - conda >=4.6
     - python
     - ruamel_yaml >=0.11.14,<0.16
-    - conda-standalone
+    - conda-standalone  # [not arm64]
+    - micromamba  # [arm64]
     - pillow >=3.1  # [win]
     - nsis >=3.01  # [win]
 
