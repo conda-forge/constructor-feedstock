@@ -5,14 +5,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: 666e3be5e6165107d7198d2753e7af6941e7f82d3bef6fc0cc98ec03310c2e01
-  patches:
-    - micromamba-arm64.patch  # [arm64]
+  - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
+    sha256: 666e3be5e6165107d7198d2753e7af6941e7f82d3bef6fc0cc98ec03310c2e01
+  - url: https://anaconda.org/conda-forge/micromamba/0.14.0/download/osx-arm64/micromamba-0.14.0-0.tar.bz2  # [arm64]
+    sha256: 931034d3ffbabf986cd3dd9c8b118fa3250e492d058067d9736c6d174cd7c744                                # [arm64]
 
 build:
   number: 2
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    - cp bin/micromamba ${PREFIX}/bin/micromamba-constructor  # [arm64]
+    - mkdir -p ${PREFIX}/standalone_conda  # [arm64]
+    - ln -s ${PREFIX}/bin/micromamba-constructor ${PREFIX}/standalone_conda/conda.exe  # [arm64]
+    - {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
 
@@ -25,7 +29,6 @@ requirements:
     - python
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone  # [not arm64]
-    - micromamba  # [arm64]
     - pillow >=3.1  # [win]
     - nsis >=3.01  # [win]
 
@@ -49,7 +52,23 @@ about:
   home: http://github.com/conda/constructor
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE.txt
+  license_file:
+    - LICENSE.txt
+    - info/licenses/CLI11_LICENSE.txt  # [arm64]
+    - info/licenses/CPP_FILESYSTEM_LICENSE.txt  # [arm64]
+    - info/licenses/CURL_LICENSE.txt  # [arm64]
+    - info/licenses/C_ARES_LICENSE.txt  # [arm64]
+    - info/licenses/KRB5_LICENSE.txt  # [arm64]
+    - info/licenses/LIBARCHIVE_LICENSE.txt  # [arm64]
+    - info/licenses/LIBEV_LICENSE.txt  # [arm64]
+    - info/licenses/LIBLZ4_LICENSE.txt  # [arm64]
+    - info/licenses/LIBNGHTTP2_LICENSE.txt  # [arm64]
+    - info/licenses/LIBOPENSSL_LICENSE.txt  # [arm64]
+    - info/licenses/LIBSOLV_LICENSE.txt  # [arm64]
+    - info/licenses/LICENSE  # [arm64]
+    - info/licenses/NLOHMANN_JSON_LICENSE.txt  # [arm64]
+    - info/licenses/REPROC_LICENSE.txt  # [arm64]
+    - info/licenses/ZSTD_LICENSE.txt  # [arm64]
   summary: create installer from conda packages
   description: |
     Constructor is a tool for constructing an installer for a collection of
