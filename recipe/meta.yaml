@@ -1,4 +1,4 @@
-{% set version = "3.2.2" %}
+{% set version = "3.3.1" %}
 
 package:
   name: constructor
@@ -6,10 +6,10 @@ package:
 
 source:
   - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-    sha256: 57497a316a26631bb56c354a727980889015a1a79bf1a51131695ddbc51a0ca5
+    sha256: b9fe6afb60b90f99708e46c871db33c236eb0a1d42652006e8801654820fea3c
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
@@ -57,6 +57,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - isuruf
     - jaimergp
     - jakirkham
     - jschueller
