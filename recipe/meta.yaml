@@ -5,11 +5,14 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-    sha256: b9fe6afb60b90f99708e46c871db33c236eb0a1d42652006e8801654820fea3c
+  url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
+  sha256: b000dde0ac8641c92f7342362173968505d4e85845be37655b5b9221cb65f3a8
+  patches:
+    - 548-fix_cache_directory_creation.patch
+    - 579-set-modification-time-for-ccahe-file-for-mamba.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main

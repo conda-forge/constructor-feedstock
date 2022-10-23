@@ -1,0 +1,88 @@
+From 337811197218af6f243ea0ff9fe6dab4e1942e78 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jaime=20Rodr=C3=ADguez-Guerra?=
+ <jaimergp@users.noreply.github.com>
+Date: Mon, 22 Aug 2022 15:06:18 +0200
+Subject: [PATCH] fix cache directory creation (#548)
+
+* fix cache directory creation
+
+* add news
+
+* Try different approch
+---
+ constructor/conda_interface.py |  6 ++++++
+ constructor/fcp.py             |  7 +++----
+ news/548-cache-creation        | 25 +++++++++++++++++++++++++
+ 3 files changed, 34 insertions(+), 4 deletions(-)
+ create mode 100644 news/548-cache-creation
+
+diff --git a/constructor/conda_interface.py b/constructor/conda_interface.py
+index 4e850aaa..66a442a3 100644
+--- a/constructor/conda_interface.py
++++ b/constructor/conda_interface.py
+@@ -132,6 +132,7 @@ def write_repodata(cache_dir, url, full_repodata, used_packages, info):
+         # Choose an arbitrary old, expired date, so that conda will want to
+         # immediately update it when not being run in offline mode
+         url = used_repodata.pop('_url').rstrip("/")
++        used_repodata.pop("_mod", None)
+         repodata = json.dumps(used_repodata, indent=2)
+         repodata_header = json.dumps(
+             {
+@@ -143,3 +144,8 @@ def write_repodata(cache_dir, url, full_repodata, used_packages, info):
+         repodata_filename = _cache_fn_url(url)
+         with open(join(cache_dir, repodata_filename), 'w') as fh:
+             fh.write(repodata)
++
++    def write_cache_dir():
++        cache_dir = join(PackageCacheData.first_writable().pkgs_dir, 'cache')
++        mkdir_p_sudo_safe(cache_dir)
++        return cache_dir
+diff --git a/constructor/fcp.py b/constructor/fcp.py
+index ff9210e7..271a5b96 100644
+--- a/constructor/fcp.py
++++ b/constructor/fcp.py
+@@ -104,10 +104,9 @@ def _show(name, version, platform, download_dir, precs, more_recent_versions={})
+ 
+ def _fetch(download_dir, precs):
+     assert conda_context.pkgs_dirs[0] == download_dir
+-    if not isdir(download_dir):
+-        os.makedirs(download_dir)
+-    pc = PackageCacheData(download_dir)
+-    assert pc.is_writable, download_dir + " does not exist or is not writable"
++    pc = PackageCacheData.first_writable()
++    assert pc.pkgs_dir == download_dir
++    assert pc.is_writable, f"{download_dir} does not exist or is not writable"
+ 
+     for prec in precs:
+         package_tarball_full_path = join(download_dir, prec.fn)
+diff --git a/news/548-cache-creation b/news/548-cache-creation
+new file mode 100644
+index 00000000..4cc54608
+--- /dev/null
++++ b/news/548-cache-creation
+@@ -0,0 +1,25 @@
++Enhancements:
++-------------
++
++* <news item>
++
++Bug fixes:
++----------
++
++* Freshly created download directories are now guaranteed to be writable (#411)
++
++Deprecations:
++-------------
++
++* <news item>
++
++Docs:
++-----
++
++* <news item>
++
++Other:
++------
++
++* <news item>
++
