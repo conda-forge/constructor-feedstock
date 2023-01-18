@@ -1,4 +1,4 @@
-{% set version = "3.3.1" %}
+{% set version = "3.4.1" %}
 
 package:
   name: constructor
@@ -6,14 +6,14 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: b000dde0ac8641c92f7342362173968505d4e85845be37655b5b9221cb65f3a8
+  sha256: a6eb77101e32e7764680a7f1b848894b76b9d8ebd9e5c4a7196ac398430d839c
   patches:
     - 548-fix_cache_directory_creation.patch
     - 579-set-modification-time-for-ccahe-file-for-mamba.patch
 
 build:
   noarch: python
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
