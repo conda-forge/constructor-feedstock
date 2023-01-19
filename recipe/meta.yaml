@@ -12,6 +12,9 @@ build:
   noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
+  script_env:  # [win]
+    - CONSTRUCTOR_SIGNTOOL_PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x86\signtool.exe  # [win]
+
   entry_points:
     - constructor = constructor.main:main
 
