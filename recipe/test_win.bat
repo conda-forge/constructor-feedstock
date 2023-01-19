@@ -7,6 +7,8 @@ powershell scripts\create_self_signed_certificate.ps1 || goto :error
 :: run integration tests
 python scripts/run_examples.py || goto :error
 
+goto :EOF
+
 :error
 echo Failed with error #%errorlevel%.
 exit 1
