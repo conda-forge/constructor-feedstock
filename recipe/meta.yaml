@@ -31,6 +31,8 @@ requirements:
     - nsis >=3.08      # [unix]
 
 test:
+  files:
+    - test_win.bat
   source_files:
     - tests
     - scripts
@@ -44,6 +46,7 @@ test:
     - pytest -v tests
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - python scripts/run_examples.py  # [unix and not aarch64]
+    - test_win.bat  # [win]
     - constructor -V
   imports:
     - constructor
