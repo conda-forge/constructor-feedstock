@@ -25,7 +25,7 @@ requirements:
     - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone
-    - pillow >=3.1     # [win or osx]
+    - pillow >=3.1
     - nsis >=3.08      # [win]
   run_constrained:     # [unix]
     - nsis >=3.08      # [unix]
