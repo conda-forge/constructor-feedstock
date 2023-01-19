@@ -17,16 +17,18 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python >=3.7
     - pip
   run:
     - __{{ target_os }}
     - conda >=4.6
-    - python >=3.6
+    - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone
-    - pillow >=3.1  # [win]
-    - nsis >=3.01,<3.08  # [win]
+    - pillow >=3.1     # [win or osx]
+    - nsis >=3.08      # [win]
+  run_constrained:     # [unix]
+    - nsis >=3.08      # [unix]
 
 test:
   source_files:
@@ -35,8 +37,10 @@ test:
     - examples
   requires:
     - pillow >=3.1
+    - pip
     - pytest
   commands:
+    - pip check
     - pytest -v tests
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - python scripts/run_examples.py  # [not aarch64]
