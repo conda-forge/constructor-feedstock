@@ -7,9 +7,6 @@ package:
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
   sha256: a6eb77101e32e7764680a7f1b848894b76b9d8ebd9e5c4a7196ac398430d839c
-  patches:
-    - 548-fix_cache_directory_creation.patch
-    - 579-set-modification-time-for-ccahe-file-for-mamba.patch
 
 build:
   noarch: python
