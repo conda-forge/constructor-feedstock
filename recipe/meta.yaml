@@ -1,4 +1,4 @@
-{% set version = "3.4.1" %}
+{% set version = "3.4.2" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: a6eb77101e32e7764680a7f1b848894b76b9d8ebd9e5c4a7196ac398430d839c
+  sha256: 00ef0c0438490229227950ff65c8a3d8fefb6a82647f8f0355ae56f330c09344
 
 build:
   noarch: python
@@ -21,7 +21,7 @@ requirements:
     - pip
   run:
     - __{{ target_os }}
-    - conda >=4.6
+    - conda >=4.6,<23.1.0
     - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone
