@@ -21,6 +21,7 @@ requirements:
     - pip
   run:
     - __{{ target_os }}
+    # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=4.6,<23.1.0
     - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
