@@ -39,13 +39,14 @@ test:
     - scripts
     - examples
   requires:
-    - pillow >=3.1
     - pip
     - pytest
+    - nsis * *log*  # [win]
   commands:
     - pip check
     - pytest -v tests
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
+    - set "NSIS_USING_LOG_BUILD=1"  # [win]
     - python scripts/run_examples.py  # [unix and not aarch64]
     - test_win.bat  # [win]
     - constructor -V
