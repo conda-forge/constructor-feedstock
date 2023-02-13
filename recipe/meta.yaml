@@ -1,4 +1,4 @@
-{% set version = "3.4.2" %}
+{% set version = "3.4.3" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: d10f65ad334e458a6f2ad3fe3a300c0ca9894a04ce1c5d6383155c0e9405839d
+  sha256: 93c5334dc689cc45c487be0b0370f2f86857cd3a1b4e816defb634585eac5aa2
 
 build:
   noarch: python
@@ -28,7 +28,7 @@ requirements:
     - conda-standalone
     - pillow >=3.1
     - nsis >=3.08      # [win]
-  run_constrained:     # [unix]
+  run_constrained:   # [unix]
     - nsis >=3.08      # [unix]
 
 test:
