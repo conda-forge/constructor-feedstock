@@ -1,11 +1,11 @@
-About constructor
-=================
+About constructor-feedstock
+===========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/constructor-feedstock/blob/main/LICENSE.txt)
 
 Home: http://github.com/conda/constructor
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/constructor-feedstock/blob/main/LICENSE.txt)
 
 Summary: create installer from conda packages
 
