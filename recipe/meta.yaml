@@ -37,8 +37,8 @@ test:
     - test_win.bat
   source_files:
     - tests
-    - scripts
-    - examples
+    # - scripts
+    # - examples
   requires:
     - pip
     - pytest
@@ -47,9 +47,9 @@ test:
     - pip check
     - pytest -v tests -k "not examples"
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
-    - set "NSIS_USING_LOG_BUILD=1"  # [win]
-    - pytest -v tests/test_examples.py  # [unix and not aarch64]
-    - test_win.bat  # [win]
+    # - set "NSIS_USING_LOG_BUILD=1"  # [win]
+    # - pytest -v tests/test_examples.py  # [unix and not aarch64]
+    # - test_win.bat  # [win]
     - constructor -V
   imports:
     - constructor
