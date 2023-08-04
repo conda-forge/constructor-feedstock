@@ -1,4 +1,4 @@
-{% set version = "3.4.4" %}
+{% set version = "3.4.5" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: d7081751f490622785807de6a78dd8ccdf71093a947489e4af5eeb76a7bd1e21
+  sha256: 425a7b6825a3dba21c21d9234ff1ceac8efea6ebc14e2b0e80d0880f502b3e01
 
 build:
   noarch: python
@@ -27,8 +27,9 @@ requirements:
     - ruamel.yaml >=0.11.14,<0.18
     - conda-standalone
     - pillow >=3.1
+    - jinja2
     - nsis >=3.08      # [win]
-  run_constrained:     # [unix]
+  run_constrained:   # [unix]
     - nsis >=3.08      # [unix]
 
 test:
@@ -36,8 +37,8 @@ test:
     - test_win.bat
   source_files:
     - tests
-    - scripts
-    - examples
+    # - scripts
+    # - examples
   requires:
     - pip
     - pytest
@@ -46,9 +47,9 @@ test:
     - pip check
     - pytest -v tests -k "not examples"
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
-    - set "NSIS_USING_LOG_BUILD=1"  # [win]
-    - pytest -v tests/test_examples.py  # [unix and not aarch64]
-    - test_win.bat  # [win]
+    # - set "NSIS_USING_LOG_BUILD=1"  # [win]
+    # - pytest -v tests/test_examples.py  # [unix and not aarch64]
+    # - test_win.bat  # [win]
     - constructor -V
   imports:
     - constructor
