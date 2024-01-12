@@ -17,14 +17,14 @@ build:
 
 requirements:
   host:
-    - python >=3.7
+    - python >=3.8
     - pip
   run:
     - __{{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=4.6
-    - python >=3.7
-    - ruamel.yaml >=0.11.14,<0.18
+    - python >=3.8
+    - ruamel.yaml >=0.11.14,<0.19
     - conda-standalone
     - pillow >=3.1
     - jinja2
