@@ -1,4 +1,4 @@
-{% set version = "3.5.0" %}
+{% set version = "3.6.0" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: 787ffd85e9414bdf70fe531f01eab3987a040e3f6a6ac3a01409f4d332f7de9e
+  sha256: c7ad07fa68322db93d47f617ab92ddf0349a027affd02473493ea6d1499b49e4
 
 build:
   noarch: python
@@ -17,14 +17,14 @@ build:
 
 requirements:
   host:
-    - python >=3.7
+    - python >=3.8
     - pip
   run:
     - __{{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=4.6
-    - python >=3.7
-    - ruamel.yaml >=0.11.14,<0.18
+    - python >=3.8
+    - ruamel.yaml >=0.11.14,<0.19
     - conda-standalone
     - pillow >=3.1
     - jinja2
