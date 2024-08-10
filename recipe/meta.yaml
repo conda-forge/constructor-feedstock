@@ -19,6 +19,8 @@ requirements:
   host:
     - python >=3.8
     - pip
+    - setuptools >=70.1
+    - setuptools-scm >=6.2
   run:
     - __{{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
