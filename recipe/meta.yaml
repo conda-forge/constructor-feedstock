@@ -1,4 +1,4 @@
-{% set version = "3.8.1" %}
+{% set version = "3.9.2" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: df3bfb0f26d256ac3c10ec30f1e95c13a8f12f58ecaedcb622dea2f860d26f20
+  sha256: 0ea4f6d563a53ebb03475dc6d2d88d3ab01be4e9d291fd276c79315aa92e5114
 
 build:
   noarch: python
@@ -14,11 +14,15 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
+  script_env:
+    - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
 
 requirements:
   host:
     - python >=3.8
     - pip
+    - setuptools >=70.1
+    - setuptools-scm >=6.2
   run:
     - __{{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
