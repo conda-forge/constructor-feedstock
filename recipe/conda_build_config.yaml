@@ -1,3 +1,4 @@
 target_os:
-  - unix  # [unix]
-  - win   # [win]
+  - linux  # [linux]
+  - osx    # [osx]
+  - win    # [win]
