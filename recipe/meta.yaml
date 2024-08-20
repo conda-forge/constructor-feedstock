@@ -1,4 +1,4 @@
-{% set version = "3.9.2" %}
+{% set version = "3.9.3" %}
 
 package:
   name: constructor
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: 0ea4f6d563a53ebb03475dc6d2d88d3ab01be4e9d291fd276c79315aa92e5114
+  sha256: c88640ca1dcb93784cf754a16c53a098633808653aa52965c909a967b84815b9
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - constructor = constructor.main:main
   script_env:
@@ -19,29 +19,28 @@ build:
 
 requirements:
   host:
-    - python >=3.8
     - pip
+    - python >=3.8
     - setuptools >=70.1
     - setuptools-scm >=6.2
   run:
     - __{{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=4.6
+    - conda-standalone
+    - jinja2
     - python >=3.8
     - ruamel.yaml >=0.11.14,<0.19
-    - conda-standalone
-    - pillow >=3.1
-    - jinja2
-    - nsis >=3.08      # [win]
-  run_constrained:   # [unix]
-    - nsis >=3.08      # [unix]
+    - pillow >=3.1  # [not linux]
+    - nsis >=3.08   # [win]
+  run_constrained:  # [unix]
+    - nsis >=3.08   # [unix]
 
 test:
   files:
     - test_win.bat
   source_files:
     - tests
-    # - scripts
     # - examples
   requires:
     - pip
@@ -49,7 +48,7 @@ test:
     - nsis * *log*  # [win]
   commands:
     - pip check
-    - pytest -v tests -k "not examples"
+    - pytest -vv --tb=long --color=yes -k "not examples"
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     # - set "NSIS_USING_LOG_BUILD=1"  # [win]
     # - pytest -v tests/test_examples.py  # [unix and not aarch64]
@@ -68,8 +67,7 @@ about:
     Constructor is a tool for constructing an installer for a collection of
     conda packages. It creates an Anaconda-like installer consisting of
     packages.
-  doc_url: https://conda.io/projects/conda/en/latest/
-  dev_url: https://github.com/conda/constructor
+  doc_url: https://conda.github.io/constructor
 
 extra:
   recipe-maintainers:
