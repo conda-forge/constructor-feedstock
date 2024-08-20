@@ -41,13 +41,14 @@ test:
     - test_win.bat
   source_files:
     - tests
+    - examples
   requires:
     - pip
     - pytest
     - nsis * *log*  # [win]
   commands:
     - pip check
-    - pytest -vv --tb=long --color=yes -k "not examples"
+    - pytest -vv --tb=long --color=yes
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     # - set "NSIS_USING_LOG_BUILD=1"  # [win]
     # - pytest -v tests/test_examples.py  # [unix and not aarch64]
