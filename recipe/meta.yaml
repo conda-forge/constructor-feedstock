@@ -1,4 +1,4 @@
-{% set version = "3.10.0" %}
+{% set version = "3.11.0" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: cfb77a5e64b5b2b44fdb5c3d04adbb652c1249a86ea2e88f9b293e367a809caf
+  sha256: d25b07c4e543053b07d7ccdfbac3e5cd93c52dec908344e3a828ed010c23c7c6
 
 build:
   number: 0
@@ -33,8 +33,9 @@ requirements:
     - ruamel.yaml >=0.11.14,<0.19
     - pillow >=3.1  # [not linux]
     - nsis >=3.08   # [win]
-  run_constrained:   # [unix]
+  run_constrained:
     - nsis >=3.08   # [unix]
+    - conda-libmamba-solver !=24.11.0
 
 test:
   files:
