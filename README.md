@@ -15,7 +15,6 @@ Constructor is a tool for constructing an installer for a collection of
 conda packages. It creates an Anaconda-like installer consisting of
 packages.
 
-
 Current build status
 ====================
 
