@@ -1,0 +1,86 @@
+schema_version: 1
+
+context:
+  version: 3.11.2
+
+package:
+  name: constructor
+  version: ${{ version }}
+
+source:
+  url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
+  sha256: fc499e251314a4752fa92bbea5ea422e81c505db056d268ed5f1148670cdc7d9
+
+build:
+  number: 0
+  noarch: python
+  script:
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
+    content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - constructor = constructor.main:main
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools >=70.1
+    - setuptools-scm >=6.2
+  run:
+    - __${{ target_os }}
+    # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
+    - conda >=4.6
+    - conda-standalone
+    - jinja2
+    - python >=${{ python_min }}
+    - ruamel.yaml >=0.11.14,<0.19
+    - if: not linux
+      then: pillow >=3.1
+    - if: win
+      then: nsis >=3.08
+  run_constraints:
+    - nsis >=3.08
+    - conda-libmamba-solver !=24.11.0
+
+tests:
+  - python:
+      pip_check: true
+      python_version: ${{ python_min }}.*
+      imports: constructor
+  - files:
+      recipe:
+        - if: win
+          then: test_win.bat
+      source:
+        - tests/
+    requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pytest
+        - if: win
+          then: nsis * *log*
+    script:
+      - pytest -vv --tb=long --color=yes -k "not examples"
+      - constructor -V
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: create installer from conda packages
+  description: |
+    Constructor is a tool for constructing an installer for a collection of
+    conda packages. It creates an Anaconda-like installer consisting of
+    packages.
+  homepage: http://github.com/conda/constructor
+  documentation: https://conda.github.io/constructor
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - jaimergp
+    - jakirkham
+    - jschueller
+    - mbargull
+    - msarahan
