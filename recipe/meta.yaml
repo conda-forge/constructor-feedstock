@@ -1,4 +1,4 @@
-{% set version = "3.11.2" %}
+{% set version = "3.11.3" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: fc499e251314a4752fa92bbea5ea422e81c505db056d268ed5f1148670cdc7d9
+  sha256: b1b0bb88a8934508f837c892b4f9c3f08b34bf044b704b1fde44b148c236efbe
 
 build:
   number: 0
