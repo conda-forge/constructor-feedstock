@@ -50,6 +50,7 @@ test:
     - pip
     - pytest
     - nsis * *log*  # [win]
+    - pywin32  # [win]
   commands:
     - pip check
     - pytest -vv --tb=long --color=yes -k "not examples"
