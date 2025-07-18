@@ -1,4 +1,4 @@
-{% set version = "3.11.3" %}
+{% set version = "3.12.0" %}
 
 package:
   name: constructor
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: b1b0bb88a8934508f837c892b4f9c3f08b34bf044b704b1fde44b148c236efbe
+  sha256: 9facacaba93ba285761ad4aa6010bab1ef04972ca8f28e37708145c46420833d
 
 build:
   number: 0
@@ -31,11 +31,13 @@ requirements:
     - jinja2
     - python >={{ python_min }}
     - ruamel.yaml >=0.11.14,<0.19
+    - jsonschema >=4
     - pillow >=3.1  # [not linux]
     - nsis >=3.08   # [win]
   run_constrained:
     - nsis >=3.08   # [unix]
     - conda-libmamba-solver !=24.11.0
+    - pydantic >=2
 
 test:
   files:
@@ -48,6 +50,7 @@ test:
     - pip
     - pytest
     - nsis * *log*  # [win]
+    - pywin32  # [win]
   commands:
     - pip check
     - pytest -vv --tb=long --color=yes -k "not examples"
