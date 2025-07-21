@@ -71,7 +71,8 @@ tests:
         - pytest
         - python ${{ python_min }}.*
         - pywin32
-        - shellcheck
+        - if: unix
+          then: shellcheck
     script:
       - pytest -vv --tb=long --color=yes -k "not examples"
       - constructor -V
