@@ -1,10 +1,10 @@
 from pathlib import Path
-import site
 import os
 import sys
 
+SP_DIR = Path(os.environ["SP_DIR"])
+PREFIX = Path(os.environ["PREFIX"])
 SRC_DIR = Path(os.environ["SRC_DIR"])
-SP_DIR = Path(site.getsitepackages()[0])
 DATA_DIR = SP_DIR / "constructor/data"
 SCHEMA_IN_SRC = SRC_DIR / "constructor/data/construct.schema.json"
 SCHEMA_IN_SP = DATA_DIR / SCHEMA_IN_SRC.name

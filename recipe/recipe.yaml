@@ -76,8 +76,8 @@ tests:
     script:
       - pytest -vv --tb=long --color=yes -k "not examples"
       - constructor -V
-      - constructor -V | python -c "import sys; v = sys.stdin.read().strip(); print(v); assert v == 'constructor ${{ version }}'"
-      - python -c "from constructor.construct import SCHEMA_PATH; assert SCHEMA_PATH.exists()"
+      - constructor -V | python -c "import sys; v = sys.stdin.read().strip(); print(v); assert v == 'constructor ${{ version }}', f'bad version {v}'"
+      - python -c "from constructor.construct import SCHEMA_PATH; assert SCHEMA_PATH.exists(), f'missing {SCHEMA_PATH}'"
 
 about:
   license: BSD-3-Clause
