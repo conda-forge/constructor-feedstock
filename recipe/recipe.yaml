@@ -21,7 +21,9 @@ build:
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
-    content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    content:
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      - python ${{ RECIPE_DIR }}/copy-schema.py
   python:
     entry_points:
       - constructor = constructor.main:main
@@ -74,6 +76,7 @@ tests:
       - pytest -vv --tb=long --color=yes -k "not examples"
       - constructor -V
       - constructor -V | python -c "import sys; v = sys.stdin.read().strip(); print(v); assert v == 'constructor ${{ version }}'"
+      - python -c "from constructor.construct import SCHEMA_PATH; assert SCHEMA_PATH.exists()"
 
 about:
   license: BSD-3-Clause
