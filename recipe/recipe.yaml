@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: 3.12.1
+  version: 3.12.2
   # avoid linter warnings below
   maybe_pillow: ${{ "pillow" if target_os != "linux" else "python" }}
   maybe_nsis: ${{ "nsis" if target_os == "win" else "python" }}
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
-  sha256: ff337c018b27fc8f0b78c8bba0171165c12422a9bbcf2d1895be82f4024842bd
+  sha256: 224fe4b51080aaefcf5272c708b3ee759d4239eaad162724931fae2123fd7286
 
 build:
   number: 0
