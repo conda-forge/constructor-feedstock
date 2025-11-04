@@ -1,0 +1,103 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "3.13.0"
+  # relax after https://github.com/conda-forge/conda-feedstock/pull/274
+  python_check_max: "3.13"
+  # avoid linter warnings below
+  maybe_pillow: ${{ "pillow" if target_os != "linux" else "python" }}
+  maybe_nsis: ${{ "nsis" if target_os == "win" else "python" }}
+
+package:
+  name: constructor
+  version: ${{ version }}
+
+source:
+  url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
+  sha256: 97d3e29f7d0ab558563494b9b77370daa6bdf0741d152fb22603c9ccf586dcbf
+
+build:
+  number: 0
+  noarch: python
+  script:
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
+    content:
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - constructor = constructor.main:main
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools >=70.1
+    - setuptools-scm >=6.2
+  run:
+    - __${{ target_os }}
+    - ${{ maybe_pillow }}
+    - ${{ maybe_nsis }}
+    # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
+    - conda >=4.6
+    - conda-standalone
+    - jinja2
+    - jsonschema >=4
+    - python >=${{ python_min }}
+    - ruamel.yaml >=0.11.14,<0.19
+  run_constraints:
+    - nsis >=3.08
+    - conda-libmamba-solver !=24.11.0
+    - pydantic >=2
+    - pillow >=3.1
+
+tests:
+  - python:
+      imports: constructor
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - ${{ python_check_max }}.*
+  - package_contents:
+      site_packages:
+        - constructor/data/construct.schema.json
+  - files:
+      # not presently used
+      # recipe:
+      #   - if: win
+      #     then: test_win.bat
+      source:
+        - tests/
+        - pyproject.toml
+    requirements:
+      run:
+        - pytest
+        - python ${{ python_min }}.*
+        - pywin32
+        - if: unix
+          then: shellcheck
+    script:
+      - pytest -vv --tb=long --color=yes -k "not examples"
+      - constructor -V
+      - constructor -V | python -c "import sys; v = sys.stdin.read().strip(); print(v); assert v == 'constructor ${{ version }}', f'bad version {v}'"
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: create installer from conda packages
+  description: |
+    Constructor is a tool for constructing an installer for a collection of
+    conda packages. It creates an Anaconda-like installer consisting of
+    packages.
+  homepage: http://github.com/conda/constructor
+  documentation: https://conda.github.io/constructor
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - jaimergp
+    - jakirkham
+    - jschueller
+    - mbargull
+    - msarahan
