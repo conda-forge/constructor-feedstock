@@ -2,12 +2,8 @@
 schema_version: 1
 
 context:
-  version: "3.13.0"
-  # relax after https://github.com/conda-forge/conda-feedstock/pull/274
-  python_check_max: "3.13"
-  # avoid linter warnings below
-  maybe_pillow: ${{ "pillow" if target_os != "linux" else "python" }}
-  maybe_nsis: ${{ "nsis" if target_os == "win" else "python" }}
+  version: "3.15.3"
+  python_check_max: "3.14"
 
 package:
   name: constructor
@@ -15,7 +11,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
-  sha256: 97d3e29f7d0ab558563494b9b77370daa6bdf0741d152fb22603c9ccf586dcbf
+  sha256: 079ab23d3c636b408d88a87afe1c858b1a0c589b48729c305e051f118d490c7b
 
 build:
   number: 0
@@ -37,8 +33,6 @@ requirements:
     - setuptools-scm >=6.2
   run:
     - __${{ target_os }}
-    - ${{ maybe_pillow }}
-    - ${{ maybe_nsis }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=4.6
     - conda-standalone
@@ -46,11 +40,16 @@ requirements:
     - jsonschema >=4
     - python >=${{ python_min }}
     - ruamel.yaml >=0.11.14,<0.19
+    - if: not linux
+      then:
+        - pillow >=3.1
+    - if: win
+      then:
+        - nsis
   run_constraints:
     - nsis >=3.08
     - conda-libmamba-solver !=24.11.0
     - pydantic >=2
-    - pillow >=3.1
 
 tests:
   - python:
