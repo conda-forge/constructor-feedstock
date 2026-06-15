@@ -20,6 +20,7 @@ build:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
       PYTHONHASHSEED: "0"
+      PIP_USE_FEATURE: "truststore=false"
     content:
       - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
