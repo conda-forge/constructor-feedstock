@@ -63,6 +63,7 @@ tests:
         - python ${{ python_min }}.*
         - pip
         - pytest
+        - pytest-mock
         - if: win
           then:
             - nsis * *log*
