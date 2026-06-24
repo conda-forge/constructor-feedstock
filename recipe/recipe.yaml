@@ -33,7 +33,7 @@ requirements:
     - __${{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=4.6
-    - conda-standalone
+    - conda-standalone >=24.11.0
     - jinja2
     - python >=${{ python_min }}
     - ruamel.yaml >=0.11.14,<0.19
