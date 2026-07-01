@@ -1,0 +1,105 @@
+schema_version: 1
+
+context:
+  version: "3.16.1"
+  python_check_max: "3.14"
+
+package:
+  name: constructor
+  version: ${{ version }}
+
+source:
+  url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
+  sha256: 5eeed6a828ccff7bec2b8d30fecb8f9b2425c1e7fb9643c4af2b665d5a80ff89
+
+build:
+  number: 0
+  noarch: python
+  script:
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
+    content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - constructor = constructor.main:main
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools >=70.1
+    - setuptools-scm >=6.2
+  run:
+    - __${{ target_os }}
+    # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
+    - conda >=4.6
+    - conda-standalone >=24.11.0
+    - jinja2
+    - python >=${{ python_min }}
+    - ruamel.yaml >=0.11.14,<0.19
+    - jsonschema >=4
+    - if: not linux
+      then: pillow >=3.1
+    - if: win
+      then:
+        - nsis >=3.08
+        - briefcase >=0.3.26
+        - tomli-w >=1.2.0
+  run_constraints:
+    - if: unix
+      then: nsis >=3.08
+    - conda-libmamba-solver !=24.11.0
+    - pydantic >=2
+
+tests:
+  - python:
+      imports:
+        - constructor
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - ${{ python_check_max }}.*
+  - package_contents:
+      site_packages:
+        - constructor/data/construct.schema.json
+  - files:
+      recipe:
+        - test_win.bat
+      source:
+        - tests
+    requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+        - pytest
+        - pytest-mock
+        - if: unix
+          then: shellcheck
+        - if: win
+          then:
+            - nsis * *log*
+            - pywin32
+    script:
+      - pytest -vv --tb=long --color=yes -k "not examples"
+      - constructor -V
+      - constructor -V | python -c "import sys; v = sys.stdin.read().strip(); print(v); assert v == 'constructor ${{ version }}', f'bad version {v}'"
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: create installer from conda packages
+  description: |
+    Constructor is a tool for constructing an installer for a collection of
+    conda packages. It creates an Anaconda-like installer consisting of
+    packages.
+  homepage: http://github.com/conda/constructor
+  documentation: https://conda.github.io/constructor
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - jaimergp
+    - jakirkham
+    - jschueller
+    - mbargull
+    - msarahan
