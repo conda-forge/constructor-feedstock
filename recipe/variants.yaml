@@ -1,0 +1,7 @@
+target_os:
+  - if: linux
+    then: [linux]
+  - if: osx
+    then: [osx]
+  - if: win
+    then: [win]

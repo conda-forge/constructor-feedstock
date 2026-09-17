@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "3.17.1"
+  version: "3.17.2"
   python_check_max: "3.14"
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
-  sha256: be546968befef2034066535ad454f153f24bae1cb3b5cfe7d52f8ce874c021d9
+  sha256: 5a9c7fb055ad1e07b4afbf947eefd0465439e769fa4649a344c768f604b3b423
 
 build:
   number: 0
@@ -32,18 +32,19 @@ requirements:
   run:
     - __${{ target_os }}
     # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
-    - conda >=4.6
+    - conda >=24.1
     - conda-standalone >=24.11.0
     - jinja2
     - python >=${{ python_min }}
     - ruamel.yaml >=0.11.14,<0.19
     - jsonschema >=4
-    - if: not linux
-      then: pillow >=3.1
+    - if: linux
+      then: distro
+      else: pillow >=3.1
     - if: win
       then:
         - nsis >=3.08
-        - briefcase >=0.3.26
+        - briefcase >=0.4.3
         - tomli-w >=1.2.0
   run_constraints:
     - if: unix
@@ -69,10 +70,11 @@ tests:
         - tests
     requirements:
       run:
-        - python ${{ python_min }}.*
         - pip
         - pytest
         - pytest-mock
+        - pytest-split
+        - python ${{ python_min }}.*
         - if: unix
           then: shellcheck
         - if: win

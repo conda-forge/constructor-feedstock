@@ -1,4 +1,0 @@
-target_os:
-  - linux  # [linux]
-  - osx    # [osx]
-  - win    # [win]
