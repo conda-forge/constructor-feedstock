@@ -67,6 +67,7 @@ tests:
       recipe:
         - test_win.bat
       source:
+        - pyproject.toml
         - tests
     requirements:
       run:
