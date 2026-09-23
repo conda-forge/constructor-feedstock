@@ -43,7 +43,7 @@ requirements:
     - if: win
       then:
         - nsis >=3.08
-        - briefcase >=0.3.26
+        - briefcase >=0.4.3
         - tomli-w >=1.2.0
   run_constraints:
     - if: unix
