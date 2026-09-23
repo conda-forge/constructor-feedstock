@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "3.16.3"
+  version: "3.17.0"
   python_check_max: "3.14"
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
-  sha256: 3e219ad324ebfc0ff80648beb19d490799df609ab1cb9bfe11e2b91fa79dcb52
+  sha256: 478ed6208231269cd9dfa0e7f6e01adf0bec1f83c463a86b62ed3a8781967da5
 
 build:
   number: 0
@@ -31,13 +31,14 @@ requirements:
     - setuptools-scm >=6.2
   run:
     - __${{ target_os }}
-    # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
-    - conda >=4.6
+    - conda >=24.1
     - conda-standalone >=24.11.0
     - jinja2
     - python >=${{ python_min }}
     - ruamel.yaml >=0.11.14,<0.19
     - jsonschema >=4
+    - if: linux
+      then: distro
     - if: not linux
       then: pillow >=3.1
     - if: win
