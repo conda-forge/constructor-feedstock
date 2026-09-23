@@ -68,7 +68,7 @@ tests:
       site_packages:
         - constructor/data/construct.schema.json
         - constructor/**
-        - constructor-${{ version }}.dist-info
+        - constructor-${{ version }}.dist-info/**
   - files:
       recipe:
         - test_win.bat
