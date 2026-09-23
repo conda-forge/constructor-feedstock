@@ -67,6 +67,8 @@ tests:
         - test_win.bat
       source:
         - tests
+        - examples/miniforge
+        - examples/miniforge-mamba2
     requirements:
       run:
         - python ${{ python_min }}.*
