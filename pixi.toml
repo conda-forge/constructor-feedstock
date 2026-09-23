@@ -5,7 +5,11 @@
 
 [workspace]
 name = "constructor-feedstock"
+<<<<<<< HEAD
 version = "2026.9.10"  # conda-smithy version used to generate this file
+=======
+version = "2026.9.22"  # conda-smithy version used to generate this file
+>>>>>>> upstream/main
 description = "Pixi configuration for conda-forge/constructor-feedstock"
 authors = ["@conda-forge/constructor"]
 channels = ["conda-forge"]
