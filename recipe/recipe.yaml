@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "3.17.1"
+  version: "3.17.2"
   python_check_max: "3.14"
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
-  sha256: be546968befef2034066535ad454f153f24bae1cb3b5cfe7d52f8ce874c021d9
+  sha256: 5a9c7fb055ad1e07b4afbf947eefd0465439e769fa4649a344c768f604b3b423
 
 build:
   number: 0
@@ -18,7 +18,8 @@ build:
   script:
     env:
       SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
-    content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    content:
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --check-build-dependencies
   python:
     entry_points:
       - constructor = constructor.main:main
@@ -31,6 +32,7 @@ requirements:
     - setuptools-scm >=6.2
   run:
     - __${{ target_os }}
+    # see for the upper conda version constrain https://github.com/conda/constructor/issues/628
     - conda >=24.1
     - conda-standalone >=24.11.0
     - jinja2
@@ -39,8 +41,7 @@ requirements:
     - jsonschema >=4
     - if: linux
       then: distro
-    - if: not linux
-      then: pillow >=3.1
+      else: pillow >=3.1
     - if: win
       then:
         - nsis >=3.08
@@ -61,21 +62,28 @@ tests:
         - ${{ python_min }}.*
         - ${{ python_check_max }}.*
   - package_contents:
+      strict: true
+      files:
+        - etc/conda/test-files/constructor/**
       site_packages:
         - constructor/data/construct.schema.json
+        - constructor/**
+        - constructor-${{ version }}.dist-info/**
   - files:
       recipe:
         - test_win.bat
       source:
+        - pyproject.toml
         - tests
         - examples/miniforge
         - examples/miniforge-mamba2
     requirements:
       run:
-        - python ${{ python_min }}.*
         - pip
         - pytest
         - pytest-mock
+        - pytest-split
+        - python ${{ python_min }}.*
         - if: unix
           then: shellcheck
         - if: win
