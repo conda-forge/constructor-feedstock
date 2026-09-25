@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "3.17.2"
+  version: "3.17.3"
   python_check_max: "3.14"
 
 package:
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
-  sha256: 5a9c7fb055ad1e07b4afbf947eefd0465439e769fa4649a344c768f604b3b423
+  sha256: 100efacc5ca0bd9dffa331a40dcb25a8a543d0170157fbc791a37f9d1857f9ef
 
 build:
   number: 0
