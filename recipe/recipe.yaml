@@ -11,9 +11,11 @@ package:
 source:
   url: https://github.com/conda/constructor/archive/${{ version }}.tar.gz
   sha256: 100efacc5ca0bd9dffa331a40dcb25a8a543d0170157fbc791a37f9d1857f9ef
+  patches:
+    - 0001-remove-ruamel-yaml-upper-bound.patch
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script:
     env:
@@ -37,7 +39,7 @@ requirements:
     - conda-standalone >=24.11.0
     - jinja2
     - python >=${{ python_min }}
-    - ruamel.yaml >=0.11.14,<0.19
+    - ruamel.yaml >=0.11.14
     - jsonschema >=4
     - if: linux
       then: distro
