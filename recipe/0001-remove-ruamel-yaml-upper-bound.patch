@@ -1,0 +1,19 @@
+From: conda/constructor PR #1393
+Subject: Remove the ruamel.yaml upper bound
+
+Backport the dependency metadata change from upstream commit
+e6b240c0bb99f89d474e95483f6de5dd980ddb60.
+
+diff --git a/pyproject.toml b/pyproject.toml
+index ed0c98093..1b342e679 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -14,7 +14,7 @@ dynamic = [
+ dependencies = [
+     "conda >=24.1",
+     "distro ; platform_system=='Linux'",
+-    "ruamel.yaml >=0.11.14,<0.19",
++    "ruamel.yaml >=0.11.14",
+     "pillow >=3.1 ; platform_system=='Windows' or platform_system=='Darwin'",
+     "jinja2",
+     "jsonschema >=4",
